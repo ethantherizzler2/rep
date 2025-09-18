@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reaper</title>
+  <link rel="icon" href="https://www.svgrepo.com/show/510444/logo-reaper.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --red: #ff1f1f;
+      --dark-bg: #0a0a0a;
+      --box-bg: #1a0000;
+      --text-color: #f4f4f4;
+      --accent-glow: rgba(255, 0, 0, 0.6);
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    header {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: radial-gradient(circle, #330000 0%, #0a0a0a 100%);
+      box-shadow: 0 0 50px var(--accent-glow);
+      animation: glowPulse 3s infinite alternate;
+      user-select: none;
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 40px var(--accent-glow); }
+      100% { box-shadow: 0 0 70px var(--accent-glow); }
+    }
+    header h1 {
+      margin: 0;
+      font-size: 4rem;
+      color: var(--red);
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px var(--red);
+      animation: fadeInDown 1.2s ease forwards;
+    }
+    header p {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      color: #ccc;
+      animation: fadeInDown 1.6s ease forwards;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .content {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 1rem;
+      animation: fadeIn 2s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    h2 {
+      color: var(--red);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 8px var(--red);
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #ddd;
+    }
+    a.learn-more {
+      color: var(--red);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    a.learn-more:hover {
+      color: #cc0000;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .tool {
+      background: linear-gradient(160deg, #1c0000, #2c0000);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      user-select: none;
+    }
+    .tool:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+    .tool img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 5px var(--red));
+      margin-bottom: 1rem;
+      user-select: none;
+      pointer-events: none;
+    }
+    .tool h3 {
+      margin: 0 0 0.5rem 0;
+      color: #ff4d4d;
+      font-size: 1.4rem;
+    }
+    .tool p {
+      flex-grow: 1;
+      margin: 0 0 1rem 0;
+      color: #ddd;
+      font-size: 0.95rem;
+    }
+    .tool a.button {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      background-color: var(--red);
+      border-radius: 6px;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+      user-select: none;
+    }
+    .tool a.button:hover {
+      background-color: #cc0000;
+      transform: scale(1.05);
+    }
+    .tool a.disabled {
+      background-color: gray;
+      cursor: not-allowed;
+      pointer-events: none;
+      color: #bbb;
+      transform: none !important;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #999;
+      border-top: 1px solid #222;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reaper</h1>
+    <p>Advanced Windows & Network Tools for Power Users</p>
+  </header>
+
+  <main class="content">
+    <section>
+      <h2>What is Reaper?</h2>
+      <p>
+        Reaper is a powerful suite of tools designed for users who need advanced
+        control over restricted or locked-down Windows systems. Whether you're working
+        on a school laptop or a corporate device with limitations, Reaper provides
+        the extra capabilities Windows doesn't allow by default.
+      </p>
+      <p>
+        With features like a network manager, process control, command line access,
+        and Windows bypassing tools, Reaper is perfect for power users. Built using
+        C++, C#, and Python.
+      </p>
+      <p>
+        <a href="reaper-info.html" class="learn-more">Learn how Reaper works →</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>Tool List</h2>
+      <div class="tool-grid">
+        <article class="tool" tabindex="0" role="region" aria-label="Reaper Terminal tool">
+          <img src="https://i.redd.it/6isihfajc73a1.png" alt="Reaper Terminal icon" />
+          <h3>Reaper Terminal</h3>
+          <p>Console-based network & Windows control tool.</p>
+          <a href="terminal.html" target="_blank" rel="noopener" class="button">Get Tool</a>
+        </article>
+
+        <article class="tool" tabindex="0" role="region" aria-label="Reaper Software tool">
+          <img src="https://i.redd.it/6isihfajc73a1.png" alt="Reaper Software icon" />
+          <h3>Reaper Software</h3>
+          <p>GUI-based network and Windows tool with more options.</p>
+          <a href="#" class="button disabled" aria-disabled="true">Coming Soon</a>
+        </article>
+
+        <article class="tool" tabindex="0" role="region" aria-label="Reaper IDE tool">
+      <img src="https://i.redd.it/6isihfajc73a1.png" alt="Reaper IDE icon" />
+      <h3>Reaper IDE</h3>
+      <p>Reaper IDE for C# coders with 5.0 support (soon 9.0)</p>
+      <a href="ide.html" target="_blank" rel="noopener" class="button">Get Tool</a>
+      </article>
+
+        <article class="tool" tabindex="0" role="region" aria-label="Reaper Network tool">
+          <img src="https://i.redd.it/6isihfajc73a1.png" alt="Reaper Network icon" />
+          <h3>Reaper Network</h3>
+          <p>Fully console-based network tool built in C++.</p>
+          <a href="network.html" target="_blank" rel="noopener" class="button">Get Tool</a>
+        </article>
+
+        <article class="tool" tabindex="0" role="region" aria-label="Reaper Database">
+          <img src="https://i.redd.it/6isihfajc73a1.png" alt="Reaper Database icon" />
+          <h3>Reaper Database</h3>
+          <p>ReaperData for Stored School accounts.</p>
+          <a href="frontend.html" target="_blank" rel="noopener" class="button">Open Database</a>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contact the Developers</h2>
+      <p>Developer: ethantherizzler_1 (Discord)</p>
+      <p>Co-Dev: qurexa_98839 (discord)</p>
+      <p>Co-Dev: bobby.1.21 (Discord)</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Reaper Dev Team. All rights reserved.
+  </footer>
+</body>
+</html>
+
