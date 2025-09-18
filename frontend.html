@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reaper Database</title>
+  <link rel="icon" href="https://www.svgrepo.com/show/510444/logo-reaper.svg" type="image/png">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: auto; 
+      color: #fff;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 70%);
+      animation: glow 6s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.2); opacity: 0.3; }
+    }
+
+    .box {
+      position: relative;
+      background: #111;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255,0,0,0.8);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .box h2 {
+      color: #ff3333;
+      text-shadow: 0 0 10px #ff0000;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      font-size: 1rem;
+      background: #222;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255,0,0,0.5) inset;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #ff0000;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #cc0000;
+      box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+    }
+
+    #loading {
+      display: none;
+      margin-top: 15px;
+      font-style: italic;
+      color: #ff4444;
+      text-shadow: 0 0 8px #ff0000;
+    }
+
+    .corner-icon {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 32px;
+      height: 32px;
+    }
+
+    @media (max-width: 480px) {
+      .box h2 { font-size: 1.2rem; }
+      .corner-icon { width: 28px; height: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Corner icon -->
+  <img class="corner-icon" src="https://i.redd.it/6isihfajc73a1.png" alt="Icon">
+
+  <div class="box">
+    <h2>Reaper Database</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <div id="loading">Connecting to Server...</div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const loading = document.getElementById("loading");
+
+      const accounts = {
+        "m.qaiser@ge-wan.herner.schule": "Diddy12",
+        "m.gitter@ge-wan.herner.schule": "Haus3456"
+      };
+
+      if (accounts[user] === pass) {
+        loading.style.display = "block";
+        setTimeout(() => {
+          window.location.href = "backend.html"; 
+        }, 3000);
+      } else {
+        alert("Invalid username and password try again!");
+      }
+    }
+  </script>
+</body>
+</html>
