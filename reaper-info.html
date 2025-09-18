@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Reaper Works</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #ff1f1f;
+      text-shadow: 0 0 10px #ff1f1f;
+    }
+    a {
+      color: #ff4d4d;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>How Reaper Works</h1>
+  <p>
+    Reaper is built to give you more control over locked-down Windows environments.
+    It bypasses certain restrictions by using a combination of kernel-level hooks,
+    system command execution, and network-level packet management.
+  </p>
+  <h2>Main Features</h2>
+  <ul>
+    <li><strong>Network Manager</strong> – Scan, monitor, and manipulate network connections in real time.</li>
+    <li><strong>Process Control</strong> – End or prioritize tasks even when Task Manager is disabled.</li>
+    <li><strong>Command Line Access</strong> – Built-in terminal with extended admin privileges.</li>
+    <li><strong>Windows Bypass Tools</strong> – Remove certain system-level restrictions without restarting.</li>
+  </ul>
+  <h2>Security & Usage</h2>
+  <p> 
+    Reaper should be used responsibly. While it offers advanced control, misuse can violate
+    workplace, school, or government IT policies.
+  </p>
+<h2>Admin Usage on Locked Devices</h2>
+<p>
+  Reaper can gain elevated privileges on certain unpatched Windows systems by using a known 
+  security flaw identified as <strong>CVE-2024-7479</strong>. This vulnerability affects 
+  the way a popular remote desktop service handles local communications and driver loading.
+</p>
+<p>
+  In short, the method involves interacting with a legitimate service running on the system, 
+  performing a secure handshake to prove access, and then loading a trusted (but vulnerable) 
+  driver to execute commands with full SYSTEM privileges. 
+  Reaper uses this only to elevate your permissions locally — it does not connect to 
+  any remote servers, install hidden software, or exfiltrate your data.
+</p>
+<p>
+  This process will <strong>only work</strong> if your IT department has not pushed the 
+  Windows or application update that fixes CVE-2024-7479. If the patch has been installed, 
+  the privilege escalation will no longer function.
+</p>
+<p>
+  Once successful, Reaper can run administrative commands, change restricted settings, 
+  and unlock features normally blocked on locked-down devices — but it will never 
+  install backdoors, remote access tools, or hidden monitoring software. All actions 
+  happen locally and only while the program is running.
+</p>
+<p>
+  <strong>Important:</strong> Use this only on systems you own or have permission to manage. 
+  Unauthorized use may violate laws or organizational policies.
+</p>
+  <p><a href="index.html">← Back to Main Page</a></p>
+</body>
+</html>
