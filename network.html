@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reaper Terminal</title>
+  <style>
+    :root {
+      --red: #ff1f1f;
+      --dark-bg: #0a0a0a;
+      --box-bg: #1a0000;
+      --text-color: #f4f4f4;
+      --accent-glow: rgba(255, 0, 0, 0.5);
+    }
+
+    body {
+      margin: 0;
+      font-family: monospace, "Courier New", monospace;
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      gap: 2rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .top-section {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .image-frame {
+      flex: 0 0 450px;
+      background-color: var(--box-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: inset 0 0 30px var(--accent-glow);
+    }
+
+    .image-frame img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .info-box {
+      flex: 1;
+      background: linear-gradient(160deg, #220000, #330000);
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      box-shadow: 0 0 40px var(--accent-glow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      color: var(--red);
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 15px var(--red);
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 1.5rem;
+    }
+
+    a.download-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: var(--red);
+      color: white;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    a.download-btn:hover {
+      background-color: #cc0000;
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #cc0000;
+    }
+
+    .commands-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .command-box {
+      background: #120000;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px var(--accent-glow);
+      border: 1px solid #330000;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .command-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .command-name {
+      color: var(--red);
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 8px var(--red);
+    }
+
+    .command-desc {
+      font-size: 0.95rem;
+      color: #f4f4f4;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 850px) {
+      .top-section {
+        flex-direction: column;
+      }
+      .image-frame {
+        width: 100%;
+        max-width: 450px;
+      }
+      h1 {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-section">
+    <div class="image-frame" title="Reaper network">
+      <img src="network.png" alt="Reaper network" />
+    </div>
+
+    <div class="info-box">
+      <h1>Reaper Terminal</h1>
+      <p>
+        Reaper Terminal is a powerful console-based network & Windows control tool.
+        Perfect for power users needing advanced system commands in one place.
+      </p>
+      <a href="https://files.catbox.moe/n6g9kd.zip" class="download-btn" download>Download Reaper Terminal</a>
+    </div>
+  </div>
+
+  <h2 style="color: var(--red); text-shadow: 0 0 10px var(--red);">Available Commands</h2>
+  <div class="commands-grid">
+    <div class="command-box">
+      <div class="command-name">hostinfo</div>
+      <div class="command-desc">Displays system hostname, domain, and network details.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">whoami</div>
+      <div class="command-desc">Shows the current logged-in user and their permissions.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">osinfo</div>
+      <div class="command-desc">Prints OS version, build, and architecture info.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">ping</div>
+      <div class="command-desc">Sends ICMP requests to check if a host is reachable.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">portscan</div>
+      <div class="command-desc">Scans TCP ports on a target host to detect open services.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">netstat</div>
+      <div class="command-desc">Lists active connections, routing tables, and listening ports.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">publicip</div>
+      <div class="command-desc">Fetches and displays your public IP address.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">ddos</div>
+      <div class="command-desc">Launches a stress-test with repeated requests on a target.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">ifconfig</div>
+      <div class="command-desc">Shows local network interface configuration and IPs.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">wifiprofiles</div>
+      <div class="command-desc">Lists saved Wi-Fi profiles and optionally reveals keys.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">ssl-info</div>
+      <div class="command-desc">Retrieves SSL/TLS certificate details from a host.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">dnslookup</div>
+      <div class="command-desc">Looks up DNS records for a domain (A, MX, TXT, etc.).</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">dnsexpand</div>
+      <div class="command-desc">Expands subdomains and DNS records for enumeration.</div>
+    </div>
+    <div class="command-box">
+      <div class="command-name">http-head</div>
+      <div class="command-desc">Fetches HTTP headers from a URL for quick server info.</div>
+    </div>
+  </div>
+</body>
+</html>
