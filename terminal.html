@@ -224,24 +224,37 @@
     </div>
   </div>
 
-  <div class="commands-box">
-    <h2>Available Commands</h2>
-    <ul>
-      <li><strong>ipscan</strong>: Scans the local network for active devices, shows IP and device name.</li>
-      <li><strong>log-wifi-info</strong>: Checks network adapter info and Wi-Fi security details.</li>
-      <li><strong>portscan</strong>: Scans TCP ports on a target IP (no admin needed).</li>
-      <li><strong>startup-manager</strong>: Lists programs and tasks that run on Windows startup.</li>
-      <li><strong>color</strong>: Changes the console text color. Usage: color &lt;a-f&gt; or reset.</li>
-      <li><strong>cd</strong>: Change directory, list files, delete files/folders.<br>
-        Usage: cd [path] | cd delfile &lt;filename&gt; | cd delfolder &lt;foldername&gt; | cd open &lt;filename&gt;</li>
-      <li><strong>ping</strong>: Ping an IP or hostname with custom count. Example: 100 pings.</li>
-      <li><strong>kernel-driver-list</strong>: List loaded kernel drivers by category.</li>
-      <li><strong>runasuser</strong>: Launch an EXE as normal user (no admin).</li>
-      <li><strong>dll-inject</strong>: Inject a DLL into a target process by name.</li>
-      <li><strong>pythondebugger</strong>: Runs a Python file from the given path.</li>
-    </ul>
-    <p><em>30+ additional commands coming soon.</em></p>
-  </div>
+ <div class="commands-box">
+  <h2>Available Commands</h2>
+  <ul>
+    <li><strong>ipscan</strong>: Scans the local network for active devices, shows IP and device name.</li>
+    <li><strong>log-wifi-info</strong>: Checks network adapter info and Wi-Fi security details.</li>
+    <li><strong>portscan</strong>: Scans TCP ports on a target IP (no admin needed).</li>
+    <li><strong>startup-manager</strong>: Lists programs and tasks that run on Windows startup.</li>
+    <li><strong>color</strong>: Changes the console text color. Usage: color &lt;a-f&gt; or reset.</li>
+    <li><strong>cd</strong>: Change directory, list files, delete files/folders.<br>
+      Usage: cd [path] | cd delfile &lt;filename&gt; | cd delfolder &lt;foldername&gt; | cd open &lt;filename&gt;</li>
+    <li><strong>ping</strong>: Ping an IP or hostname with custom count. Example: 100 pings.</li>
+    <li><strong>kernel-driver-list</strong>: List loaded kernel drivers by category.</li>
+    <li><strong>runasuser</strong>: Launch an EXE as normal user (no admin).</li>
+    <li><strong>dll-inject</strong>: Inject a DLL into a target process by name.</li>
+    <li><strong>pythondebugger</strong>: Runs a Python file from the given path.</li>
+    <li><strong>sysinfo</strong>: Shows system information.</li>
+    <li><strong>log-user</strong>: Prompt for local username/password and start a process as that user. Usage: log-user</li>
+    <li><strong>add-startup</strong>: Adds this terminal to Windows startup (Current User).</li>
+    <li><strong>remove-startup</strong>: Removes this terminal from Windows startup (Current User).</li>
+  </ul>
+
+  <!-- Error Section -->
+  <h2 style="margin-top: 2rem; color: #ff5555; text-shadow: 0 0 10px #ff5555;">Current Errors / Issues</h2>
+  <ul style="background: rgba(255, 0, 0, 0.15); padding: 1.3rem 1.5rem; border-radius: 10px; box-shadow: 0 0 15px rgba(255, 0, 0, 0.25); max-height: 180px; overflow-y: auto;">
+    <li><strong>kernel-driver-list</strong>: Fails due to <em>NtQuerySystemInformation</em> returning <em>0xC0000004</em> (buffer size mismatch).</li>
+    <li><strong>runasuser</strong>: Launching as normal user does not work correctly.</li>
+  </ul>
+
+  <p><em>More Commands get added each update. | Current Version: 1.0.0.1</em></p>
+
+</div>
 </body>
 </html>
 
