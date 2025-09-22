@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,6 +130,37 @@
       line-height: 1.5;
     }
 
+    /* Error section style matching commands */
+    .errors-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .error-box {
+      background: #120000;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 85, 85, 0.7);
+      border: 1px solid #330000;
+    }
+
+    .error-name {
+      color: #ff5555;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 8px #ff5555;
+    }
+
+    .error-desc {
+      font-size: 0.95rem;
+      color: #f4f4f4;
+      line-height: 1.5;
+    }
+
     @media (max-width: 850px) {
       .top-section {
         flex-direction: column;
@@ -211,13 +241,17 @@
       <div class="command-name">dnslookup</div>
       <div class="command-desc">Looks up DNS records for a domain (A, MX, TXT, etc.).</div>
     </div>
-    <div class="command-box">
-      <div class="command-name">dnsexpand</div>
-      <div class="command-desc">Expands subdomains and DNS records for enumeration.</div>
+  </div>
+
+  <h2 style="color: var(--red); text-shadow: 0 0 10px var(--red); margin-top: 2rem;">Current Errors / Issues</h2>
+  <div class="errors-grid">
+    <div class="error-box">
+      <div class="error-name">kernel-driver-list</div>
+      <div class="error-desc">Fails because <em>NtQuerySystemInformation</em> returned <em>0xC0000004</em> (buffer size mismatch).</div>
     </div>
-    <div class="command-box">
-      <div class="command-name">http-head</div>
-      <div class="command-desc">Fetches HTTP headers from a URL for quick server info.</div>
+    <div class="error-box">
+      <div class="error-name">runasuser</div>
+      <div class="error-desc">Launching as normal user does not work correctly.</div>
     </div>
   </div>
 </body>
