@@ -130,7 +130,6 @@
       line-height: 1.5;
     }
 
-    /* Error section style matching commands */
     .errors-grid {
       width: 100%;
       display: grid;
@@ -161,6 +160,16 @@
       line-height: 1.5;
     }
 
+    .disclaimer {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 0, 0, 0.08);
+      font-size: 0.95rem;
+      color: #f0dcdc;
+      margin-bottom: 1rem;
+    }
+
     @media (max-width: 850px) {
       .top-section {
         flex-direction: column;
@@ -187,67 +196,150 @@
         Reaper Terminal is a powerful console-based network & Windows control tool.
         Perfect for power users needing advanced system commands in one place.
       </p>
-      <a href="https://files.catbox.moe/n6g9kd.zip" class="download-btn" download>Download Reaper Terminal</a>
+      <a href="https://files.catbox.moe/majg5j.zip" class="download-btn" download>Download Reaper Terminal</a>
     </div>
   </div>
 
   <h2 style="color: var(--red); text-shadow: 0 0 10px var(--red);">Available Commands</h2>
+
+  <div class="disclaimer">
+    These entries are descriptions only. Implementation is intentionally omitted for actions that can be abused (flooding, sniffing, unauthorized access). Use these tools only on systems you own or have explicit permission to test.
+  </div>
+
   <div class="commands-grid">
+
+    <div class="command-box">
+      <div class="command-name">ipscan</div>
+      <div class="command-desc">Discover live hosts on a subnet using ping/ARP discovery. Useful for inventory and troubleshooting.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">winlocator</div>
+      <div class="command-desc">Find Windows hosts and common reachable Windows services on the network (discovery/identification only).</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">arpwatch</div>
+      <div class="command-desc">Monitor ARP table changes to detect new devices or ARP anomalies on the LAN. Good for spotting misconfigurations.</div>
+    </div>
+
     <div class="command-box">
       <div class="command-name">hostinfo</div>
-      <div class="command-desc">Displays system hostname, domain, and network details.</div>
+      <div class="command-desc">Shows hostname, DNS names, domain membership and basic network info for a host (informational).</div>
     </div>
+
     <div class="command-box">
       <div class="command-name">whoami</div>
-      <div class="command-desc">Shows the current logged-in user and their permissions.</div>
+      <div class="command-desc">Displays the currently logged-in user and effective privileges on the local system.</div>
     </div>
+
     <div class="command-box">
       <div class="command-name">osinfo</div>
-      <div class="command-desc">Prints OS version, build, and architecture info.</div>
+      <div class="command-desc">Prints operating system, version, build number and CPU architecture — useful for compatibility checks.</div>
     </div>
-    <div class="command-box">
-      <div class="command-name">ping</div>
-      <div class="command-desc">Sends ICMP requests to check if a host is reachable.</div>
-    </div>
-    <div class="command-box">
-      <div class="command-name">portscan</div>
-      <div class="command-desc">Scans TCP ports on a target host to detect open services.</div>
-    </div>
+
     <div class="command-box">
       <div class="command-name">netstat</div>
-      <div class="command-desc">Lists active connections, routing tables, and listening ports.</div>
+      <div class="command-desc">Lists active network connections, listening ports, and routing info to help diagnose network state.</div>
     </div>
+
+    <div class="command-box">
+      <div class="command-name">remote-device</div>
+      <div class="command-desc">Enumerates reachable device metadata (type, hostname, ports) for a remote network device. Informational only.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">ping</div>
+      <div class="command-desc">Send ICMP echo requests to verify reachability and measure round-trip latency to a host.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">portscan</div>
+      <div class="command-desc">Scan specified TCP/UDP ports on a target to find open services. Use responsibly and with permission.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">sniffer</div>
+      <div class="command-desc">Capture packets on an interface for traffic analysis. Requires explicit authorization and adherence to privacy laws.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">ipconfig</div>
+      <div class="command-desc">Show local interface configuration (IP addresses, gateways, DNS servers) on Windows systems.</div>
+    </div>
+
     <div class="command-box">
       <div class="command-name">publicip</div>
-      <div class="command-desc">Fetches and displays your public IP address.</div>
+      <div class="command-desc">Fetch the machine's public IP address as seen by internet services — useful for NAT and connectivity checks.</div>
     </div>
+
     <div class="command-box">
-      <div class="command-name">ddos</div>
-      <div class="command-desc">Launches a stress-test with repeated requests on a target.</div>
+      <div class="command-name">geolocate</div>
+      <div class="command-desc">Lookup approximate geographic location for an IP using public geolocation databases. Not precise; for context only.</div>
     </div>
-    <div class="command-box">
-      <div class="command-name">ifconfig</div>
-      <div class="command-desc">Shows local network interface configuration and IPs.</div>
-    </div>
-    <div class="command-box">
-      <div class="command-name">wifiprofiles</div>
-      <div class="command-desc">Lists saved Wi-Fi profiles and optionally reveals keys.</div>
-    </div>
-    <div class="command-box">
-      <div class="command-name">ssl-info</div>
-      <div class="command-desc">Retrieves SSL/TLS certificate details from a host.</div>
-    </div>
+
     <div class="command-box">
       <div class="command-name">dnslookup</div>
-      <div class="command-desc">Looks up DNS records for a domain (A, MX, TXT, etc.).</div>
+      <div class="command-desc">Retrieve DNS records (A, AAAA, MX, TXT, etc.) for a domain to help debug name resolution and service setup.</div>
     </div>
+
+    <div class="command-box">
+      <div class="command-name">dnsexpand</div>
+      <div class="command-desc">Resolve CNAME chains and expand domain records to show final endpoints and aliases (informational).</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">http-head</div>
+      <div class="command-desc">Send an HTTP HEAD to inspect server response headers and status without fetching the full body (quick fingerprint).</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">ssl-info</div>
+      <div class="command-desc">Retrieve SSL/TLS certificate metadata (issuer, validity dates, SANs) for a host to check expiry and chain issues.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">wol</div>
+      <div class="command-desc">Send a Wake-on-LAN magic packet to wake a powered-off machine configured for WOL. Requires correct MAC and network path.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">macvendor</div>
+      <div class="command-desc">Lookup vendor/manufacturer information for a MAC address to help identify device types on the LAN.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">whoami-net</div>
+      <div class="command-desc">Show network-context user/host identity (effective user, hostname, domain membership) useful for auth debugging.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">bandwidth</div>
+      <div class="command-desc">Run a benign throughput test between endpoints to estimate available bandwidth (diagnostic, not stress testing).</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">ddos</div>
+      <div class="command-desc">(Listed for completeness) Represents a stress/flood concept. <strong>No implementation provided.</strong> Launching floods without permission is illegal.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">pingflood</div>
+      <div class="command-desc">(Listed for completeness) High-rate ICMP testing concept. Not implemented here and should not be used without explicit authorization.</div>
+    </div>
+
+    <div class="command-box">
+      <div class="command-name">wifiprofiles</div>
+      <div class="command-desc">List saved Wi‑Fi profiles on the local machine (SSIDs and metadata). Retrieving stored keys typically requires elevated rights.</div>
+    </div>
+
   </div>
 
   <h2 style="color: var(--red); text-shadow: 0 0 10px var(--red); margin-top: 2rem;">Current Errors / Issues</h2>
   <div class="errors-grid">
     <div class="error-box">
       <div class="error-name">Reaper</div>
-      <div class="error-desc">Network terminal <em>has no errors</em> . <em>.</em>.</div>
+      <div class="error-desc">Network terminal <em>has no errors</em>.</div>
     </div>
   </div>
 </body>
