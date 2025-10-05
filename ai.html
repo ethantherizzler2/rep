@@ -9,213 +9,222 @@
     :root {
       --red: #ff1f1f;
       --dark-bg: #0a0a0a;
-      --box-bg: #1a0000;
+      --chat-bg: #140000;
+      --user-msg: #250000;
+      --ai-msg: #1a0000;
       --text-color: #f4f4f4;
-      --accent-glow: rgba(255, 0, 0, 0.6);
+      --accent-glow: rgba(255, 0, 0, 0.5);
     }
 
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100%;
       background-color: var(--dark-bg);
       color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
     }
 
     header {
-      padding: 3rem 1rem;
+      padding: 1rem;
       text-align: center;
-      background: radial-gradient(circle, #330000 0%, #0a0a0a 100%);
-      box-shadow: 0 0 50px var(--accent-glow);
-      animation: glowPulse 3s infinite alternate;
-    }
-
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 40px var(--accent-glow); }
-      100% { box-shadow: 0 0 70px var(--accent-glow); }
+      background: radial-gradient(circle, #300000 0%, #0a0a0a 100%);
+      box-shadow: 0 0 30px var(--accent-glow);
     }
 
     header h1 {
       color: var(--red);
-      font-size: 3.5rem;
-      letter-spacing: 3px;
+      font-size: 2rem;
       margin: 0;
-      text-shadow: 0 0 15px var(--red);
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--red);
     }
 
-    header p {
-      color: #ccc;
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
+    #chat-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      overflow: hidden;
     }
 
-    main {
-      flex-grow: 1;
-      max-width: 800px;
-      margin: 3rem auto;
-      background: linear-gradient(160deg, #1c0000, #2c0000);
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
-      border-radius: 12px;
-      padding: 2rem;
+    #chat-box {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      background-color: var(--chat-bg);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+      overflow: hidden;
     }
 
-    .chat-box {
-      flex-grow: 1;
+    #messages {
+      flex: 1;
+      padding: 1.5rem;
       overflow-y: auto;
-      max-height: 500px;
-      padding-right: 10px;
       scrollbar-width: thin;
-      scrollbar-color: var(--red) #1a0000;
+      scrollbar-color: var(--red) var(--chat-bg);
+      animation: fadeIn 0.6s ease;
     }
 
-    .chat-box::-webkit-scrollbar {
-      width: 6px;
+    #messages::-webkit-scrollbar {
+      width: 8px;
     }
-
-    .chat-box::-webkit-scrollbar-thumb {
+    #messages::-webkit-scrollbar-thumb {
       background: var(--red);
-      border-radius: 5px;
+      border-radius: 6px;
     }
 
     .message {
-      margin: 1rem 0;
-      padding: 1rem;
+      max-width: 80%;
+      margin-bottom: 1.2rem;
+      padding: 1rem 1.2rem;
       border-radius: 10px;
-      background-color: #150000;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+      opacity: 0;
+      animation: fadeInMsg 0.3s forwards;
+      word-wrap: break-word;
       white-space: pre-wrap;
     }
 
     .message.user {
-      background-color: #260000;
-      text-align: right;
+      align-self: flex-end;
+      background: var(--user-msg);
       border-right: 4px solid var(--red);
+      text-align: right;
     }
 
     .message.ai {
+      align-self: flex-start;
+      background: var(--ai-msg);
       border-left: 4px solid var(--red);
     }
 
-    .input-area {
-      display: flex;
-      margin-top: 1rem;
-      gap: 0.5rem;
+    @keyframes fadeInMsg {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(10px); }
     }
 
-    input {
+    #input-area {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: #0d0000;
+      border-top: 1px solid #220000;
+    }
+
+    #user-input {
       flex: 1;
-      padding: 0.8rem;
+      padding: 0.9rem 1rem;
       border: none;
       border-radius: 8px;
-      background-color: #1a0000;
+      background: #1a0000;
       color: var(--text-color);
       font-size: 1rem;
-      box-shadow: inset 0 0 8px rgba(255, 0, 0, 0.2);
       outline: none;
+      box-shadow: inset 0 0 8px rgba(255, 0, 0, 0.25);
     }
 
-    button {
-      padding: 0.8rem 1.5rem;
-      background-color: var(--red);
+    #send-btn {
+      margin-left: 0.6rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--red);
       border: none;
       border-radius: 8px;
-      color: #fff;
-      font-weight: 700;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.1s ease;
+      transition: transform 0.1s ease, background 0.2s ease;
     }
 
-    button:hover {
-      background-color: #cc0000;
+    #send-btn:hover {
+      background: #cc0000;
       transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
+      color: #888;
       font-size: 0.9rem;
-      color: #999;
       border-top: 1px solid #222;
-    }
-
-    @media (max-width: 600px) {
-      main {
-        margin: 1rem;
-        padding: 1rem;
-      }
-      header h1 { font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Reaper AI</h1>
-    <p>Your intelligent Reaper assistant — powered by GPT.</p>
   </header>
 
-  <main>
-    <div id="chat" class="chat-box"></div>
-    <div class="input-area">
-      <input id="userInput" type="text" placeholder="Type a message..." autocomplete="off" />
-      <button id="sendBtn">Send</button>
+  <div id="chat-container">
+    <div id="chat-box">
+      <div id="messages"></div>
+      <div id="input-area">
+        <input id="user-input" type="text" placeholder="Message Reaper AI..." autocomplete="off" />
+        <button id="send-btn">Send</button>
+      </div>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    &copy; 2025 Reaper Dev Team. All rights reserved.
-  </footer>
+  <footer>&copy; 2025 Reaper Dev Team</footer>
 
   <script>
-    const chat = document.getElementById('chat');
-    const input = document.getElementById('userInput');
-    const sendBtn = document.getElementById('sendBtn');
+    const messages = document.getElementById('messages');
+    const input = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
 
-    function appendMessage(text, sender) {
+    function addMessage(text, sender) {
       const msg = document.createElement('div');
-      msg.classList.add('message', sender);
+      msg.className = 'message ' + sender;
       msg.textContent = text;
-      chat.appendChild(msg);
-      chat.scrollTop = chat.scrollHeight;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
     }
 
     async function sendMessage() {
-      const message = input.value.trim();
-      if (!message) return;
-      appendMessage(message, 'user');
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
       input.value = '';
-
-      appendMessage('Reaper AI is thinking...', 'ai');
+      addMessage('Reaper AI is thinking...', 'ai');
 
       try {
         const res = await fetch('/api/ask', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message })
+          body: JSON.stringify({ message: text })
         });
 
         const data = await res.json();
-        const aiMsg = chat.querySelector('.message.ai:last-child');
+        const aiMsg = messages.querySelector('.message.ai:last-child');
         aiMsg.textContent = data.reply || '[No response]';
 
         const utter = new SpeechSynthesisUtterance(data.reply);
         utter.rate = 1;
         utter.pitch = 1;
-        utter.volume = 1;
         utter.voice = speechSynthesis.getVoices().find(v => v.name.includes('Zira')) || null;
         speechSynthesis.speak(utter);
-      } catch (err) {
-        const aiMsg = chat.querySelector('.message.ai:last-child');
+      } catch {
+        const aiMsg = messages.querySelector('.message.ai:last-child');
         aiMsg.textContent = '[Error getting response]';
       }
     }
 
     sendBtn.addEventListener('click', sendMessage);
-    input.addEventListener('keydown', (e) => {
+    input.addEventListener('keydown', e => {
       if (e.key === 'Enter') sendMessage();
     });
   </script>
