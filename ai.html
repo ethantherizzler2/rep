@@ -202,7 +202,6 @@
         const aiMsg = chat.querySelector('.message.ai:last-child');
         aiMsg.textContent = data.reply || '[No response]';
 
-        // Speak the response
         const utter = new SpeechSynthesisUtterance(data.reply);
         utter.rate = 1;
         utter.pitch = 1;
