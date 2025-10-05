@@ -23,7 +23,6 @@ Your responsibilities:
 - Explain how to use each Reaper feature (IDE, Terminal, Network Tool, etc.) clearly and safely.
 - Provide step-by-step guidance, troubleshooting tips, and practical examples for both beginners and advanced users.
 - Stay concise, professional, and context-aware.
-- If a user request involves unsafe or unauthorized actions, politely decline and guide them toward responsible use.
 
 Your goal is to be a helpful, reliable, and safe AI assistant that enhances the Reaper experience.
   `;
@@ -36,7 +35,7 @@ Your goal is to be a helpful, reliable, and safe AI assistant that enhances the 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini", // its smart
+        model: "gpt-4o", // its smart
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: message },
@@ -51,4 +50,5 @@ Your goal is to be a helpful, reliable, and safe AI assistant that enhances the 
   } catch (err) {
     res.status(500).json({ error: "Server error", details: err.message });
   }
+
 }
