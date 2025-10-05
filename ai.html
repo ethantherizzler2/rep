@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reaper AI - Advanced Chat</title>
-    <link rel="icon" href="https://www.svgrepo.com/show/510444/logo-reaper.svg" type="image/svg+xml" />
+    <link rel="icon" href="[https://www.svgrepo.com/show/510444/logo-reaper.svg](https://www.svgrepo.com/show/510444/logo-reaper.svg)" type="image/svg+xml" />
     <style>
         /* --- CSS Variables: Tighter, More Controlled Theme --- */
         :root {
@@ -19,6 +19,10 @@
             --border-color: #2e0000;
             --input-bg: #1c1c1c;
             --header-bg: radial-gradient(circle, #330000 0%, #0d0d0d 100%);
+            /* New Variable for Code Block */
+            --code-bg: #000000; /* Pure black for maximum contrast */
+            --code-border: #440000; /* Subtle red border for code */
+            --code-text: #cccccc;
         }
 
         /* --- Base & Layout --- */
@@ -37,7 +41,7 @@
             line-height: 1.6;
         }
 
-        /* --- Header --- */
+        /* --- Header, Chat Box, Messages, Input Area (from previous version) --- */
         header {
             padding: 1.5rem 1rem;
             text-align: center;
@@ -48,75 +52,62 @@
 
         header h1 {
             color: var(--red);
-            font-size: 2.5rem; /* Larger title */
+            font-size: 2.5rem;
             margin: 0;
-            letter-spacing: 4px; /* More spaced out */
+            letter-spacing: 4px;
             text-transform: uppercase;
             text-shadow: 0 0 15px var(--red);
         }
 
-        /* --- Main Chat Area --- */
         #chat-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: stretch;
-            padding: 20px; /* Added padding around the chat box */
+            padding: 20px;
             overflow: hidden;
         }
 
         #chat-box {
             width: 100%;
-            max-width: 1000px; /* Slightly wider */
+            max-width: 1000px;
             display: flex;
             flex-direction: column;
             background-color: var(--chat-bg);
-            border-radius: 16px; /* Slightly larger radius */
-            border: 2px solid var(--border-color); /* Subtle border */
-            box-shadow: 0 0 60px rgba(255, 51, 51, 0.15); /* Softer overall glow */
+            border-radius: 16px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 60px rgba(255, 51, 51, 0.15);
             overflow: hidden;
-            flex-grow: 1; /* Ensure it takes up space in a flexible container */
+            flex-grow: 1;
         }
 
-        /* --- Messages Area (Scrollable) --- */
         #messages {
             flex: 1;
             padding: 20px 25px;
             overflow-y: auto;
-            /* Enhanced Scrollbar for better visibility */
             scrollbar-width: thin;
             scrollbar-color: var(--red) var(--chat-bg);
             background-image: linear-gradient(to top, var(--chat-bg) 0%, transparent 100%);
         }
 
-        #messages::-webkit-scrollbar {
-            width: 8px;
-        }
-        #messages::-webkit-scrollbar-thumb {
-            background: var(--red);
-            border-radius: 6px;
-        }
-        #messages::-webkit-scrollbar-track {
-            background: var(--chat-bg);
-        }
+        #messages::-webkit-scrollbar { width: 8px; }
+        #messages::-webkit-scrollbar-thumb { background: var(--red); border-radius: 6px; }
+        #messages::-webkit-scrollbar-track { background: var(--chat-bg); }
 
-        /* --- Individual Messages --- */
         .message {
-            max-width: 85%; /* A little wider messages */
+            max-width: 85%;
             margin-bottom: 15px;
             padding: 1.1rem 1.4rem;
             border-radius: 12px;
             line-height: 1.6;
-            transition: all 0.2s ease-out; /* Smooth hover transition */
+            transition: all 0.2s ease-out;
             word-wrap: break-word;
-            white-space: pre-wrap;
             opacity: 0;
             transform: translateY(10px);
             animation: fadeInMsg 0.4s forwards;
             position: relative;
         }
 
-        /* User Message Styling */
         .message.user {
             align-self: flex-end;
             background: var(--user-msg);
@@ -124,13 +115,10 @@
             text-align: right;
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
-            border-top-right-radius: 4px; /* Slight design variation */
+            border-top-right-radius: 4px;
         }
-        .message.user:hover {
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
-        }
+        .message.user:hover { box-shadow: 0 0 15px rgba(255, 51, 51, 0.3); }
 
-        /* AI Message Styling */
         .message.ai {
             align-self: flex-start;
             background: var(--ai-msg);
@@ -138,12 +126,11 @@
             border-top-right-radius: 12px;
             border-bottom-right-radius: 12px;
             border-top-left-radius: 4px;
+            /* Allows content like code blocks to determine width */
+            padding: 1.1rem 1.4rem; 
         }
-        .message.ai:hover {
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
-        }
+        .message.ai:hover { box-shadow: 0 0 15px rgba(255, 51, 51, 0.3); }
 
-        /* Initial Welcome Message Styling */
         .message.welcome {
             background-color: transparent;
             border-left: 5px solid var(--secondary-text);
@@ -153,14 +140,13 @@
             align-self: center;
             max-width: 90%;
             text-align: center;
+            padding: 0.8rem 1.4rem;
         }
 
-        /* Animation for Messages */
         @keyframes fadeInMsg {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Input Area --- */
         #input-area {
             display: flex;
             align-items: center;
@@ -210,7 +196,6 @@
             transform: translateY(0);
         }
         
-        /* --- Footer --- */
         footer {
             text-align: center;
             padding: 0.8rem;
@@ -220,27 +205,45 @@
             background-color: #000000;
         }
 
+        /* --- New Code Block Styling --- */
+        .message.ai pre {
+            /* Full width of the message container, override padding/margins */
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0; /* Space it out from surrounding text */
+            overflow-x: auto; /* Allows horizontal scrolling for long lines */
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: var(--code-text);
+            line-height: 1.4;
+            white-space: pre; /* Ensure code lines do not wrap */
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.1); /* Subtle glow on code */
+        }
+        
+        .message.ai code {
+            /* For inline code, e.g., `variable` */
+            background-color: #2e0000; /* Darker red background */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        /* Adjust message padding for AI message when it contains code, 
+           to allow the pre block to stretch inside nicely */
+        .message.ai-code-present {
+            padding: 1rem 1.2rem; 
+        }
+
         /* --- Responsiveness --- */
         @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            #chat-container {
-                padding: 10px;
-            }
-            #messages {
-                padding: 15px;
-            }
-            .message {
-                max-width: 100%; /* Full width on small screens */
-            }
-            #input-area {
-                padding: 0.7rem;
-            }
-            #user-input, #send-btn {
-                padding: 0.8rem 1.2rem;
-                font-size: 1rem;
-            }
+            header h1 { font-size: 2rem; }
+            #chat-container { padding: 10px; }
+            #messages { padding: 15px; }
+            .message { max-width: 100%; }
+            #input-area { padding: 0.7rem; }
+            #user-input, #send-btn { padding: 0.8rem 1.2rem; font-size: 1rem; }
         }
     </style>
 </head>
@@ -268,7 +271,46 @@
         const inputEl = document.getElementById('user-input');
         const sendBtn = document.getElementById('send-btn');
 
-        // --- Core Functions ---
+        // --- New Markdown/Code Formatting Function ---
+        /**
+         * Converts a simple markdown string with code blocks (```) and inline code (`)
+         * into HTML for display.
+         * NOTE: This is a simplified function. For production, use a library like marked.js
+         * @param {string} text - The raw text from the AI.
+         * @returns {string} The HTML formatted text.
+         */
+        function formatMarkdown(text) {
+            // 1. Escape HTML to prevent XSS (Cross-Site Scripting)
+            let htmlText = text.replace(/&/g, '&amp;')
+                               .replace(/</g, '&lt;')
+                               .replace(/>/g, '&gt;');
+
+            // 2. Replace Code Blocks (```)
+            // This is the main part. It finds everything between ``` and wraps it in <pre><code>
+            // The regex looks for ``` followed by optional language name, then the content, then ```
+            // We use [\s\S]*? to match content including newlines non-greedily.
+            htmlText = htmlText.replace(/```(?:\w+)?\n?([\s\S]*?)```/g, (match, code) => {
+                // 'code' is the content inside the backticks
+                // We don't escape again because it was already escaped in step 1, 
+                // and the <pre> will handle the whitespace.
+                return `<pre><code>${code.trim()}</code></pre>`;
+            });
+
+            // 3. Replace Inline Code (`) - Do this after code blocks to avoid conflicts
+            htmlText = htmlText.replace(/`([^`]+)`/g, (match, code) => {
+                return `<code>${code}</code>`;
+            });
+            
+            // 4. Convert newlines (\n) to <br> for regular text (but not inside <pre>)
+            // This is tricky without a proper parser, but often necessary for chat readability.
+            // We'll trust the regex in step 2 to isolate the <pre> blocks.
+            // For simple text: Convert all single newlines to <br> tags.
+            // To ensure proper line breaks outside the code block
+            htmlText = htmlText.replace(/(?<!<\/code>)(\n)(?!<pre>|<\/pre>)/g, '<br>');
+
+
+            return htmlText;
+        }
 
         /**
          * Adds a new message to the chat interface.
@@ -279,33 +321,31 @@
             const msg = document.createElement('div');
             msg.className = 'message ' + sender;
             
-            // Allow for markdown-like formatting in AI response (e.g., code blocks)
             if (sender === 'ai') {
-                // In a real app, you'd use a markdown parser here. 
-                // For simplicity, we'll just set textContent for security.
-                msg.textContent = text; 
+                const formattedHtml = formatMarkdown(text);
+                msg.innerHTML = formattedHtml;
+                // Add a helper class if code blocks were found (for potential styling tweaks)
+                if (text.includes('```')) {
+                     msg.classList.add('ai-code-present');
+                }
             } else {
+                // User/Welcome messages are plain text for security and simplicity
                 msg.textContent = text;
             }
             
             messagesEl.appendChild(msg);
-            // Auto-scroll to the bottom smoothly
             messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
         }
 
-        /**
-         * Handles the sending of a message.
-         */
+
         async function sendMessage() {
             const text = inputEl.value.trim();
             if (!text) return;
 
-            // 1. Add User Message
             addMessage(text, 'user');
             inputEl.value = '';
             inputEl.focus();
             
-            // 2. Add 'Thinking' placeholder
             const placeholderMsg = document.createElement('div');
             placeholderMsg.className = 'message ai thinking';
             placeholderMsg.textContent = 'Reaper AI is processing...';
@@ -313,7 +353,6 @@
             messagesEl.scrollTop = messagesEl.scrollHeight;
 
             try {
-                // 3. API Call
                 const res = await fetch('/api/ask', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -323,45 +362,38 @@
                 const data = await res.json();
                 const replyText = data.reply || '[AI system failure. Try again.]';
                 
-                // 4. Update Placeholder with Final Response
-                placeholderMsg.textContent = replyText;
                 placeholderMsg.classList.remove('thinking');
+                placeholderMsg.classList.add('ai'); 
+                
+                const formattedHtml = formatMarkdown(replyText);
+                placeholderMsg.innerHTML = formattedHtml;
 
-                // 5. Optional: Text-to-Speech (TTS) - Keep this on a user interaction for browser compatibility
-                // ttsSpeak(replyText); 
+                if (replyText.includes('```')) {
+                     placeholderMsg.classList.add('ai-code-present');
+                }
 
             } catch (error) {
                 console.error("Fetch error:", error);
-                // 4. Update Placeholder with Error
                 placeholderMsg.textContent = `[Error communicating with the AI system: ${error.message || 'Network issue'}]`;
                 placeholderMsg.classList.remove('thinking');
-                placeholderMsg.style.backgroundColor = '#500000'; // Darker error color
+                placeholderMsg.style.backgroundColor = '#500000';
             }
             
             messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
         }
 
-      function ttsSpeak(text) {
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.rate = 1.05; 
-        utter.pitch = 0.9; 
-      utter.voice = speechSynthesis.getVoices().find(v => v.name.includes('Google US English')) || null;
-           speechSynthesis.speak(utter);
-      }
-    
         function initChat() {
-            addMessage('I am Reaper AI. My purpose is to assist with your most critical tasks. How may I be of service?', 'ai');
+            addMessage('I am Reaper AI. My purpose is to assist with your most critical tasks. Try asking me for a function in a programming language, like: **"Give me a Javascript function for calculating factorials."**', 'ai');
         }
 
         sendBtn.addEventListener('click', sendMessage);
         inputEl.addEventListener('keydown', e => {
-            if (e.key === 'Enter' && !e.shiftKey) { // Prevents accidental sending if user wants a new line
-                e.preventDefault(); // Stop the default Enter key action (like adding a newline)
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
                 sendMessage();
             }
         });
         
-        // Run on page load
         initChat();
     </script>
 </body>
