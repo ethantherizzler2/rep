@@ -35,7 +35,7 @@ Your goal is to be a helpful, reliable, and safe AI assistant that enhances the 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o", // its smart
+        model: "gpt-4o-mini", // its smart
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: message },
@@ -52,3 +52,4 @@ Your goal is to be a helpful, reliable, and safe AI assistant that enhances the 
   }
 
 }
+
