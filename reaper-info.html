@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>How Reaper Works</title>
   <style>
     body {
@@ -21,6 +20,26 @@
       color: #ff4d4d;
       text-decoration: underline;
     }
+    .section {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-left: 4px solid rgba(255,31,31,0.25);
+      background: rgba(255,31,31,0.02);
+    }
+    pre {
+      background: #071217;
+      padding: 0.75rem;
+      border-radius: 6px;
+      overflow: auto;
+    }
+    .note {
+      color: #ffd28a;
+      font-weight: 600;
+    }
+    .warning {
+      color: #ff8a8a;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -30,46 +49,121 @@
     It bypasses certain restrictions by using a combination of kernel-level hooks,
     system command execution, and network-level packet management.
   </p>
-  <h2>Main Features</h2>
-  <ul>
-    <li><strong>Network Manager</strong> – Scan, monitor, and manipulate network connections in real time.</li>
-    <li><strong>Process Control</strong> – End or prioritize tasks even when Task Manager is disabled.</li>
-    <li><strong>Command Line Access</strong> – Built-in terminal with extended admin privileges.</li>
-    <li><strong>Windows Bypass Tools</strong> – Remove certain system-level restrictions without restarting.</li>
-  </ul>
-  <h2>Security & Usage</h2>
-  <p> 
-    Reaper should be used responsibly. While it offers advanced control, misuse can violate
-    workplace, school, or government IT policies.
-  </p>
-<h2>Admin Usage on Locked Devices</h2>
-<p>
-  Reaper can gain elevated privileges on certain unpatched Windows systems by using a known 
-  security flaw identified as <strong>CVE-2024-7479</strong>. This vulnerability affects 
-  the way a popular remote desktop service handles local communications and driver loading.
-</p>
-<p>
-  In short, the method involves interacting with a legitimate service running on the system, 
-  performing a secure handshake to prove access, and then loading a trusted (but vulnerable) 
-  driver to execute commands with full SYSTEM privileges. 
-  Reaper uses this only to elevate your permissions locally — it does not connect to 
-  any remote servers, install hidden software, or exfiltrate your data.
-</p>
-<p>
-  This process will <strong>only work</strong> if your IT department has not pushed the 
-  Windows or application update that fixes CVE-2024-7479. If the patch has been installed, 
-  the privilege escalation will no longer function.
-</p>
-<p>
-  Once successful, Reaper can run administrative commands, change restricted settings, 
-  and unlock features normally blocked on locked-down devices — but it will never 
-  install backdoors, remote access tools, or hidden monitoring software. All actions 
-  happen locally and only while the program is running.
-</p>
-<p>
-  <strong>Important:</strong> Use this only on systems you own or have permission to manage. 
-  Unauthorized use may violate laws or organizational policies.
-</p>
+
+  <div class="section">
+    <h2>Main Features</h2>
+    <ul>
+      <li><strong>Network Manager</strong> – Scan, monitor, and manipulate network connections in real time.</li>
+      <li><strong>Process Control</strong> – End or prioritize tasks even when Task Manager is disabled.</li>
+      <li><strong>Command Line Access</strong> – Built-in terminal with extended admin privileges.</li>
+      <li><strong>Windows Bypass Tools</strong> – Remove certain system-level restrictions without restarting.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Stress Test Explanation</h2>
+
+    <p>
+      This section explains the <strong>website stress/load test</strong> concept used by the Baseline / Spike / Soak / Stress modes.
+      The goal of a load test is to measure how a web service behaves under different traffic patterns so you can find bottlenecks and improve stability.
+    </p>
+
+    <h3>What the test measures</h3>
+    <ul>
+      <li><strong>Latency</strong> — how long the site takes to respond (ms).</li>
+      <li><strong>Success rate</strong> — percentage of successful (2xx–3xx) responses vs errors.</li>
+      <li><strong>Throughput</strong> — requests per second the server can handle.</li>
+      <li><strong>Stability over time</strong> — whether the server slows down or degrades under sustained load.</li>
+    </ul>
+
+    <h3>Modes — simple explanations</h3>
+    <ul>
+      <li><strong>Baseline</strong> — steady, controlled traffic. Used to measure normal behavior and establish a baseline latency and success rate.</li>
+      <li><strong>Spike</strong> — sudden burst of traffic early in the test. Used to see how the site behaves under quick surges (e.g., a viral moment).</li>
+      <li><strong>Soak</strong> — lower-to-moderate traffic sustained for a long period. Used to detect memory leaks, resource exhaustion, or gradual performance degradation.</li>
+      <li><strong>Stress</strong> — push to high or maximum concurrency to identify the system's breaking point and failure modes.</li>
+    </ul>
+
+    <h3>How it works (conceptual)</h3>
+    <p>
+      At a high level the test:
+    </p>
+    <ol>
+      <li>Chooses a traffic pattern based on the selected mode.</li>
+      <li>Starts multiple simultaneous requests (concurrency) to the target URL according to that pattern.</li>
+      <li>Measures response time and response code for each request and records results to a log or CSV file.</li>
+      <li>Monitors error rate; if too many failures occur, the test can stop early to avoid unnecessary load.</li>
+    </ol>
+
+    <h3>Example (non-actionable, conceptual code)</h3>
+    <p class="note">This is illustrative pseudocode showing the idea — it is <em>not</em> runnable load-test code and avoids implementation details.</p>
+    <pre><code>// PSEUDO-CODE (concept only)
+mode = "spike"                // baseline | spike | soak | stress
+durationSeconds = 60
+maxConcurrency = 200
+
+pattern = ChoosePattern(mode, maxConcurrency, durationSeconds)
+
+// For each scheduled attempt we:
+sendRequest(targetUrl)        // perform a single HTTP request (measure latency and status)
+record(timestamp, latencyMs, statusCode)
+
+// At the end: analyze records to compute average latency, error rate, and throughput
+</code></pre>
+
+    <h3>Example of recorded CSV line</h3>
+    <pre><code>1697040000000,124,200
+// timestamp_ms, latency_ms, http_status_code
+</code></pre>
+
+    <h3 class="warning">Legal & safe use</h3>
+    <p>
+      <strong>Important:</strong> Running load or stress tests against servers you do not own or do not have explicit permission to test is unethical and may be illegal. Always:
+    </p>
+    <ul>
+      <li>Obtain written permission from the site owner or hosting provider before testing.</li>
+      <li>Run tests in a controlled environment or on staging systems whenever possible.</li>
+      <li>Set limits and error thresholds so tests stop automatically if the target starts failing.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Security & Usage</h2>
+    <p> 
+      Reaper should be used responsibly. While it offers advanced control, misuse can violate
+      workplace, school, or government IT policies.
+    </p>
+
+    <h2>Admin Usage on Locked Devices</h2>
+    <p>
+      Reaper can gain elevated privileges on certain unpatched Windows systems by using a known 
+      security flaw identified as <strong>CVE-2024-7479</strong>. This vulnerability affects 
+      the way a popular remote desktop service handles local communications and driver loading.
+    </p>
+    <p>
+      In short, the method involves interacting with a legitimate service running on the system, 
+      performing a secure handshake to prove access, and then loading a trusted (but vulnerable) 
+      driver to execute commands with full SYSTEM privileges. 
+      Reaper uses this only to elevate your permissions locally — it does not connect to 
+      any remote servers, install hidden software, or exfiltrate your data.
+    </p>
+    <p>
+      This process will <strong>only work</strong> if your IT department has not pushed the 
+      Windows or application update that fixes CVE-2024-7479. If the patch has been installed, 
+      the privilege escalation will no longer function.
+    </p>
+    <p>
+      Once successful, Reaper can run administrative commands, change restricted settings, 
+      and unlock features normally blocked on locked-down devices — but it will never 
+      install backdoors, remote access tools, or hidden monitoring software. All actions 
+      happen locally and only while the program is running.
+    </p>
+    <p>
+      <strong>Important:</strong> Use this only on systems you own or have permission to manage. 
+      Unauthorized use may violate laws or organizational policies.
+    </p>
+  </div>
+
   <p><a href="index.html">← Back to Main Page</a></p>
 </body>
 </html>
