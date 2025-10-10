@@ -54,7 +54,7 @@
     <h2>Main Features</h2>
     <ul>
       <li><strong>Network Manager</strong> – Scan, monitor, and manipulate network connections in real time.</li>
-      <li><strong>Process Control</strong> – End or prioritize tasks even when Task Manager is disabled.</li>
+      <li><strong>Windows Manager</strong> – Windows commands, do stuff your IT blocks</li>
       <li><strong>Command Line Access</strong> – Built-in terminal with extended admin privileges.</li>
       <li><strong>Windows Bypass Tools</strong> – Remove certain system-level restrictions without restarting.</li>
     </ul>
@@ -64,7 +64,7 @@
     <h2>Stress Test Explanation</h2>
 
     <p>
-      This section explains the <strong>website stress/load test</strong> concept used by the Baseline / Spike / Soak / Stress modes.
+      This section explains the <strong>NetworkTerminal stress/load Command</strong> concept used by the Baseline / Spike / Soak / Stress modes.
       The goal of a load test is to measure how a web service behaves under different traffic patterns so you can find bottlenecks and improve stability.
     </p>
 
@@ -104,11 +104,11 @@ maxConcurrency = 200
 
 pattern = ChoosePattern(mode, maxConcurrency, durationSeconds)
 
-// For each scheduled attempt we:
+// For each  attempt we:
 sendRequest(targetUrl)        // perform a single HTTP request (measure latency and status)
 record(timestamp, latencyMs, statusCode)
 
-// At the end: analyze records to compute average latency, error rate, and throughput
+// in the end: analyze records to compute average latency error rate and throughput
 </code></pre>
 
     <h3>Example of recorded CSV line</h3>
